@@ -20,10 +20,11 @@ class String{
         
     public :
         char *value=NULL;
-        
+        int index=0;
        
         String(const char *obj){
             value=(char*)malloc(strlen(obj)+16);
+            index=maxpagesss;
             maxpagess[maxpagesss]=value;
             maxpagesss++;
             strcpy(value,obj);
@@ -31,6 +32,7 @@ class String{
         String(String *obj){
             value=(char*)malloc(strlen(obj->value)+16);
             maxpagess[maxpagesss]=value;
+            index=maxpagesss;
             maxpagesss++;
             strcpy(value,obj->value);
         };
@@ -38,7 +40,7 @@ class String{
         void operator=(const char *obj){
             long i=strlen(obj)+16;
             value=(char*)realloc((void*)value,(size_t)i);
-
+            maxpagess[index]=value;
             strcpy(value,obj); 
             
             
@@ -48,7 +50,9 @@ class String{
             String ress(obj->value);
             long i=strlen(obj->value)+16;
             value=(char*)realloc((void*)value,(size_t)i);
-            strcpy(ress.value,obj->value); 
+            maxpagess[index]=value;
+            strcpy(ress.value,obj->value);
+            maxpagess[ress.index]=ress.value;
             return ress;
             
         };
@@ -57,7 +61,9 @@ class String{
             String ress(value);
             long i=strlen(obj.value)+16+strlen(ress.value);
             value=(char*)realloc((void*)value,(size_t)i);
-            ress.value=(char*)realloc((void*)value,(size_t)i);   
+            maxpagess[index]=value;
+            ress.value=(char*)realloc((void*)value,(size_t)i); 
+            maxpagess[ress.index]=ress.value;  
             strcat(ress.value,obj.value); 
             return ress;
             
@@ -68,7 +74,9 @@ class String{
             String ress(value);
             long i=strlen(obj)+16+strlen(ress.value);
             value=(char*)realloc((void*)value,(size_t)i);
+            maxpagess[index]=value;
             ress.value=(char*)realloc((void*)value,(size_t)i);
+            maxpagess[ress.index]=ress.value;
             strcat(ress.value,obj); 
             return ress;
             
@@ -84,8 +92,9 @@ class String{
             String ress(value);
             long i=strlen(obj.value)+16+strlen(ress.value);
             value=(char*)realloc((void*)value,(size_t) i);
+            maxpagess[index]=value;
             ress.value=(char*)realloc((void*)value,(size_t)i);
-
+            maxpagess[ress.index]=ress.value;
             strcat(ress.value,obj.value); 
             return ress;
             
@@ -96,7 +105,9 @@ class String{
             String ress(value);
             long i=strlen(obj)+16+strlen(ress.value);
             value=(char*)realloc((void*)value,(size_t)i);
+            maxpagess[index]=value;
             ress.value=(char*)realloc((void*)value,(size_t)i);
+            maxpagess[ress.index]=ress.value;
             strcat(ress.value,obj); 
             return ress;
             
@@ -114,10 +125,11 @@ class string{
         
     public :
         char *value=NULL;
-        
+        int index=0;
        
         string(const char *obj){
             value=(char*)malloc(strlen(obj)+16);
+            index=maxpagesss;
             maxpagess[maxpagesss]=value;
             maxpagesss++;
             strcpy(value,obj);
@@ -125,6 +137,7 @@ class string{
         string(string *obj){
             value=(char*)malloc(strlen(obj->value)+16);
             maxpagess[maxpagesss]=value;
+            index=maxpagesss;
             maxpagesss++;
             strcpy(value,obj->value);
         };
@@ -132,7 +145,7 @@ class string{
         void operator=(const char *obj){
             long i=strlen(obj)+16;
             value=(char*)realloc((void*)value,(size_t)i);
-
+            maxpagess[index]=value;
             strcpy(value,obj); 
             
             
@@ -142,7 +155,9 @@ class string{
             string ress(obj->value);
             long i=strlen(obj->value)+16;
             value=(char*)realloc((void*)value,(size_t)i);
-            strcpy(ress.value,obj->value); 
+            maxpagess[index]=value;
+            strcpy(ress.value,obj->value);
+            maxpagess[ress.index]=ress.value;
             return ress;
             
         };
@@ -151,7 +166,9 @@ class string{
             string ress(value);
             long i=strlen(obj.value)+16+strlen(ress.value);
             value=(char*)realloc((void*)value,(size_t)i);
-            ress.value=(char*)realloc((void*)value,(size_t)i);   
+            maxpagess[index]=value;
+            ress.value=(char*)realloc((void*)value,(size_t)i); 
+            maxpagess[ress.index]=ress.value;  
             strcat(ress.value,obj.value); 
             return ress;
             
@@ -162,7 +179,9 @@ class string{
             string ress(value);
             long i=strlen(obj)+16+strlen(ress.value);
             value=(char*)realloc((void*)value,(size_t)i);
+            maxpagess[index]=value;
             ress.value=(char*)realloc((void*)value,(size_t)i);
+            maxpagess[ress.index]=ress.value;
             strcat(ress.value,obj); 
             return ress;
             
@@ -178,8 +197,9 @@ class string{
             string ress(value);
             long i=strlen(obj.value)+16+strlen(ress.value);
             value=(char*)realloc((void*)value,(size_t) i);
+            maxpagess[index]=value;
             ress.value=(char*)realloc((void*)value,(size_t)i);
-
+            maxpagess[ress.index]=ress.value;
             strcat(ress.value,obj.value); 
             return ress;
             
@@ -190,7 +210,9 @@ class string{
             string ress(value);
             long i=strlen(obj)+16+strlen(ress.value);
             value=(char*)realloc((void*)value,(size_t)i);
+            maxpagess[index]=value;
             ress.value=(char*)realloc((void*)value,(size_t)i);
+            maxpagess[ress.index]=ress.value;
             strcat(ress.value,obj); 
             return ress;
             
