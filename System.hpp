@@ -925,20 +925,14 @@ class outs{
 
 
 
-        char *Readln(const char *c){
-            char ccc[4096];
-            char *c1=ccc;
-            printf(c);
-            fgets(ccc,4095,stdin);
-            return c1;
-        };
-
+        
 
 
 };
 
 class inss{
-        char *Readln(const char *c){
+    public:
+        char *readLine(const char *c){
             char ccc[4096];
             char *c1=ccc;
             printf(c);
@@ -953,7 +947,7 @@ class inss{
 class Systems{
     public:
         outs out;
-        inss in;
+        inss console;
 };
 void frees(){
     long i=0;
