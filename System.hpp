@@ -829,6 +829,398 @@ class Int32{
 
 
 };
+class Variantes{
+    protected :
+        
+    public :
+        char *value=NULL;
+        int index=0;
+        double valuef=0;
+        int vvalue=0;
+        Variantes(const char *obj){
+            value=(char*)malloc(strlen(obj)+16);
+            index=maxpagesss;
+            maxpagess[maxpagesss]=value;
+            maxpagesss++;
+            strcpy(value,obj);
+            vvalue=0;
+        };
+        Variantes(String *obj){
+            value=(char*)malloc(strlen(obj->value)+16);
+            maxpagess[maxpagesss]=value;
+            index=maxpagesss;
+            maxpagesss++;
+            strcpy(value,obj->value);
+            vvalue=0;
+        };
+        Variantes(Variantes *obj){
+            if (obj->vvalue==0){
+                value=(char*)malloc(strlen(obj->value)+16);
+                maxpagess[maxpagesss]=value;
+                index=maxpagesss;
+                maxpagesss++;
+                strcpy(value,obj->value);
+                vvalue=0;
+            }else{
+                valuef=obj->valuef;
+                vvalue=1; 
+            }
+        };
+        Variantes(float obj){
+            vvalue=1;
+            valuef=(double)obj;
+        };
+
+        Variantes(long obj){
+            vvalue=1;
+            valuef=(double)obj;
+        };
+
+        Variantes(double obj){
+            vvalue=1;
+            valuef=obj;
+        };
+        Variantes(int obj){
+            vvalue=1;
+            valuef=(double)obj;
+        };
+
+        void operator=(const char *obj){
+            if (vvalue==0){
+                long i=strlen(obj)+16;
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                strcpy(value,obj); 
+            }else{
+                valuef=atof(obj);
+                vvalue=1;
+            }
+            
+            
+        };
+
+        Variantes operator=(String *obj){
+            if (vvalue==0){
+                Variantes ress(obj->value);
+                long i=strlen(obj->value)+16;
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                strcpy(ress.value,obj->value);
+                maxpagess[ress.index]=ress.value;
+                vvalue=0;
+                return ress;
+            }else{
+                Variantes ress(atof(obj->value));
+                
+                ress.vvalue=1;
+                return ress ;
+            }
+        };
+        Variantes operator=(Variantes *obj){
+            if (vvalue==0){
+                Variantes ress(obj->value);
+                long i=strlen(obj->value)+16;
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                strcpy(ress.value,obj->value);
+                maxpagess[ress.index]=ress.value;
+                vvalue=0;
+                return ress;
+            }else{
+                Variantes ress(obj->valuef);
+                
+                ress.vvalue=1;
+                return ress;
+            }
+        };
+        Variantes operator=(float obj){
+            char c[4096];
+            if (vvalue==0){
+                sprintf(c,"%f",obj);
+                Variantes ress(c);
+                long i=strlen(c)+16;
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                strcpy(ress.value,c);
+                maxpagess[ress.index]=ress.value;
+                vvalue=0;
+                return ress;
+            }else{
+                Variantes ress(obj);
+                
+                ress.vvalue=1;
+                return ress ;
+            }
+        }; 
+        Variantes operator=(int obj){
+            char c[4096];
+            if (vvalue==0){
+                sprintf(c,"%i",obj);
+                Variantes ress(c);
+                long i=strlen(c)+16;
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                strcpy(ress.value,c);
+                maxpagess[ress.index]=ress.value;
+                vvalue=0;
+                return ress;
+            }else{
+                Variantes ress((double)obj);
+                
+                ress.vvalue=1;
+                return ress ;
+            }
+        }; 
+
+
+        Variantes operator+(const char *obj){
+            if (vvalue==0){
+                Variantes ress(value);
+                long i=strlen(obj)+16+strlen(ress.value);
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                ress.value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[ress.index]=ress.value;
+                strcat(ress.value,obj); 
+                return ress;
+            }else{
+                Variantes ress(valuef);
+                ress.valuef=ress.valuef+atof(obj);
+                return ress;
+            }
+            
+        };
+        
+
+
+        Variantes operator+(String& obj){
+            if (vvalue==0){ 
+                Variantes ress(value);
+                long i=strlen(obj.value)+16+strlen(ress.value);
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                ress.value=(char*)realloc((void*)value,(size_t)i); 
+                maxpagess[ress.index]=ress.value;  
+                strcat(ress.value,obj.value); 
+                return ress;
+            }else{
+                Variantes ress(valuef);
+                ress.valuef=ress.valuef+atof(obj.value);
+                return ress;
+            }        
+                
+        };
+        Variantes operator+(float obj){
+            char c[4096];
+            if (vvalue==0){
+                sprintf(c,"%f",obj); 
+                Variantes ress(value);
+                long i=strlen(c)+16+strlen(ress.value);
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                ress.value=(char*)realloc((void*)value,(size_t)i); 
+                maxpagess[ress.index]=ress.value;  
+                strcat(ress.value,c); 
+                return ress;
+            }else{
+                Variantes ress(valuef);
+                ress.valuef=ress.valuef+(double)obj;
+                return ress;
+            }        
+                
+        };
+        Variantes operator+(double obj){
+            char c[4096];
+            if (vvalue==0){
+                sprintf(c,"%f",obj); 
+                Variantes ress(value);
+                long i=strlen(c)+16+strlen(ress.value);
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                ress.value=(char*)realloc((void*)value,(size_t)i); 
+                maxpagess[ress.index]=ress.value;  
+                strcat(ress.value,c); 
+                return ress;
+            }else{
+                Variantes ress(valuef);
+                ress.valuef=ress.valuef+(double)obj;
+                return ress;
+            }        
+                
+        };
+        Variantes operator+(int obj){
+            char c[4096];
+            if (vvalue==0){
+                sprintf(c,"%i",obj); 
+                Variantes ress(value);
+                long i=strlen(c)+16+strlen(ress.value);
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                ress.value=(char*)realloc((void*)value,(size_t)i); 
+                maxpagess[ress.index]=ress.value;  
+                strcat(ress.value,c); 
+                return ress;
+            }else{
+                Variantes ress(valuef);
+                ress.valuef=ress.valuef+(double)obj;
+                return ress;
+            }        
+                
+        };
+        Variantes operator+(long obj){
+            char c[4096];
+            if (vvalue==0){
+                sprintf(c,"%f",obj); 
+                Variantes ress(value);
+                long i=strlen(c)+16+strlen(ress.value);
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                ress.value=(char*)realloc((void*)value,(size_t)i); 
+                maxpagess[ress.index]=ress.value;  
+                strcat(ress.value,c); 
+                return ress;
+            }else{
+                Variantes ress(valuef);
+                ress.valuef=ress.valuef+(double)obj;
+                return ress;
+            }        
+                
+        };
+
+        Variantes operator+(Variantes& obj){
+            if (vvalue==0){ 
+                Variantes ress(value);
+                long i=strlen(obj.value)+16+strlen(ress.value);
+                value=(char*)realloc((void*)value,(size_t)i);
+                maxpagess[index]=value;
+                ress.value=(char*)realloc((void*)value,(size_t)i); 
+                maxpagess[ress.index]=ress.value;  
+                strcat(ress.value,obj.value); 
+                return ress;
+            }else{
+                Variantes ress(valuef);
+                ress.valuef=ress.valuef+obj.valuef;
+                return ress;
+            }        
+                
+        };
+
+        Variantes operator-(int obj){
+            vvalue=1; 
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef-obj;
+            return ii;
+            
+            
+        };
+        Variantes operator-(double obj){
+            vvalue=1; 
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef-obj;
+            return ii;
+            
+            
+        };
+
+        Variantes operator-(Variantes& obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef-obj.valuef;
+            return ii;
+            
+            
+        };
+
+        Variantes operator*(int obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef*obj;
+            return ii;
+            
+            
+        };
+        Variantes operator*(double obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef*obj;
+            return ii;
+            
+            
+        };
+
+        Variantes operator*(Variantes& obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef*obj.valuef;
+            return ii;
+            
+            
+        };
+        Variantes operator/(int obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef/obj;
+            return ii;
+            
+            
+        };
+        Variantes operator/(double obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef/obj;
+            return ii;
+            
+            
+        };
+
+        Variantes operator/(Variantes& obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=ii.valuef/obj.valuef;
+            return ii;
+            
+            
+        };
+        Variantes operator%(int obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=(double)((int)((int) ii.valuef)%obj);
+            return ii;
+            
+            
+        };
+        Variantes operator%(float obj){
+            vvalue=1;
+            Variantes ii(valuef);
+            ii.valuef=(double)((int)ii.valuef%((int)obj));
+            return ii;
+            
+            
+        };
+
+        Variantes operator%(Variantes& obj){
+            vvalue=1;
+            Variantes ii(value);
+            ii.valuef=(double)((int)ii.valuef%(int)obj.valuef);
+            return ii;
+        };    
+
+        char *ToString(){
+            char *ccc=value;
+            char c[4096];
+            char *cccc=c;
+            if (vvalue==0){
+                return ccc;
+            }else{
+               
+                sprintf(c,"%f",valuef);
+                return cccc;
+            }
+            return ccc;
+        }; 
+};
+
+
 
 class outs{
     protected :
@@ -840,6 +1232,10 @@ class outs{
         void println(String c){
             puts(c.ToString());
         };
+        void println(Variantes c){
+            puts(c.ToString());
+        };
+
         void println(string c){
             puts(c.ToString());
         };
@@ -886,6 +1282,10 @@ class outs{
         void print(String c){
             printf(c.ToString());
         };
+        void print(Variantes c){
+            printf(c.ToString());
+        };
+
         void print(string c){
             printf(c.ToString());
         };
